@@ -1,5 +1,9 @@
 package com.eagle.stormy;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 public class CurrentWeather {
     private double mTemperature;
     private double mHumidity;
@@ -7,6 +11,7 @@ public class CurrentWeather {
     private String mSummary;
     private String mIcon;
     private long mTime;
+    private String mTimeZone;
 
     public String getIcon() {
         return mIcon;
@@ -18,6 +23,15 @@ public class CurrentWeather {
 
     public long getTime() {
         return mTime;
+    }
+
+    public String getFormattedTime(){
+        SimpleDateFormat formatter = new SimpleDateFormat("h:mm a");
+        formatter.setTimeZone(TimeZone.getTimeZone(getTimeZone()));
+        Date dateTime = new Date(getTime() * 1000);
+        String timeString = formatter.format(dateTime);
+
+        return timeString;
     }
 
     public void setTime(long time) {
@@ -57,4 +71,11 @@ public class CurrentWeather {
     }
 
 
+    public String getTimeZone() {
+        return mTimeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        mTimeZone = timeZone;
+    }
 }
